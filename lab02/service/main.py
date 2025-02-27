@@ -1,8 +1,10 @@
-from typing import List, Optional
+from pathlib import Path
+from typing import Annotated, List, Optional
 
 import fastapi
 import uvicorn
-from fastapi.responses import Response
+from fastapi import File
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 
 app = fastapi.FastAPI()
@@ -12,6 +14,7 @@ class Product(BaseModel):
     id: int
     name: str
     description: str
+    icon: Optional[str] = None
 
 
 class ProductIn(BaseModel):
@@ -71,6 +74,41 @@ def delete_product(product_id: int) -> Product:
 @app.get("/products")
 def get_products() -> List[Product]:
     return products
+
+
+def get_new_image_path() -> str:
+    image_dir = Path("images")
+    image_num = 0
+    while True:
+        image_fp = image_dir / f"{image_num}.png"
+        if not image_fp.exists():
+            break
+        image_num += 1
+    image_fp.parent.mkdir(parents=True, exist_ok=True)
+    return str(image_fp)
+
+
+@app.post("/product/{product_id}/image")
+def set_image(product_id: int, icon: Annotated[bytes, File()]) -> JSONResponse:
+    i = find_product(product_id)
+    if i is None:
+        return Response(status_code=404)
+    image_fp = get_new_image_path()
+    with open(image_fp, "wb+") as f:
+        f.write(icon)
+    products[i].icon = image_fp
+    return {"file_size": len(icon)}
+
+
+@app.get("/product/{product_id}/image")
+def get_image(product_id: int) -> Response:
+    i = find_product(product_id)
+    if i is None:
+        return Response("No such product", status_code=404)
+    if products[i].icon is None:
+        return Response("Product has no icon", status_code=404)
+    with open(products[i].icon, "rb") as f:
+        return Response(content=f.read(), media_type="image/png")
 
 
 if __name__ == "__main__":

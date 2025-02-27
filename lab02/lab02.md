@@ -97,7 +97,11 @@
 ```
 
 #### Демонстрация работы
-todo
+1. Загрузить иконку
+![alt text](image-5.png)
+![alt text](image-6.png)
+2. Получить иконку
+![alt text](image-7.png)
 
 ---
 
