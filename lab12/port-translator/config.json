@@ -1,0 +1,22 @@
+[
+    {
+        "listen": 2222,
+        "forward_ip": "77.88.55.88",
+        "forward_port": 80
+    },
+    {
+        "listen": 1234,
+        "forward_ip": "146.190.62.39",
+        "forward_port": 80
+    },
+    {
+        "listen": 9999,
+        "forward_ip": "210.140.139.155",
+        "forward_port": 80
+    },
+    {
+        "listen": 5555,
+        "forward_ip": "107.189.29.30",
+        "forward_port": 80
+    }
+]

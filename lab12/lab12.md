@@ -70,7 +70,10 @@ UDP, а также выводит количество потерянных па
 <img src="images/tcp.png" width=700 />
 
 #### Демонстрация работы
-todo
+Код в папке `speedtest`
+
+![alt text](image.png)
+![alt text](image-1.png)
 
 ### 2. Измерение по протоколу UDP (3 балла)
 Пример интерфейса:
@@ -78,7 +81,8 @@ todo
 <img src="images/udp.png" width=700 />
 
 #### Демонстрация работы
-todo
+![alt text](image-2.png)
+![alt text](image-3.png)
    
 
 ## Транслятор портов (6 баллов)
@@ -93,4 +97,7 @@ todo
 <img src="images/port-translator.png" width=600 />
 
 #### Демонстрация работы
-todo
+Код в папке `port-translator`
+
+![alt text](image-5.png)
+![alt text](image-4.png)
